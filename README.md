@@ -1,6 +1,6 @@
 # celQuest
 
-This project is a [briefly describe the project and its purpose].
+This project is a web app that scrapes questions about a person and uses AI to generate new questions about them.
 
 ## Functionality
 
@@ -19,12 +19,11 @@ The project is organized into the following directories:
 
 To get started with the project, follow these steps:
 
-* [list the steps to get started with the project]
+* run npm install
+* run npm run dev
 
 ## Contributing
 
-Contributions are welcome! To contribute, please [list the steps to contribute].
+Contributions are welcome!
 
-## License
-
-This project is licensed under [list the license].
+To contribute, please fork the repository and submit a pull request.
