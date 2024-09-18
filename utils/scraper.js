@@ -1,13 +1,13 @@
 const axios = require('axios');
 
-async function scrapeQuestionsFromGoogleCustomSearchApi(celebrity) {
-  const apiKey = process.env.GOOGLE_API_KEY;
-  const searchEngineId = process.env.GOOGLE_SEARCH_ENGINE_ID;
-  const query = `${celebrity}`;
+async function scrapeQuestionsFromGoogleCustomSearchApiUsing(InputtedCelebrityNameFromUser) {
+  const apiKeyToConnectWithGoogleCustomSearchApi = process.env.GOOGLE_API_KEY;
+  const searchEngineIdFromGoogleCustomSearchEngine = process.env.GOOGLE_SEARCH_ENGINE_ID;
+  let InputtedCelebrityNameFromUser
 
-  const url = `https://www.googleapis.com/customsearch/v1?key=${apiKey}&cx=${searchEngineId}&q=${encodeURIComponent(query)}`;
+  const googleApiUrlToScrapResultsFrom = `https://www.googleapis.com/customsearch/v1?key=${apiKeyToConnectWithGoogleCustomSearchApi}&cx=${searchEngineIdFromGoogleCustomSearchEngine}&q=${encodeURIComponent(InputtedCelebrityNameFromUser)}`;
 
-  try {
+ let functionToReturnTheListOfQuestionsInJsonFormat = try {
     console.log('Fetching from URL:', url);
     const response = await axios.get(url);
     console.log('Response status:', response.status);
@@ -15,15 +15,17 @@ async function scrapeQuestionsFromGoogleCustomSearchApi(celebrity) {
     const items = response.data.items || [];
     
     if (items.length === 0) {
-      console.log('No search results found for:', celebrity);
+      console.log('No search results found for:', InputtedCelebrityNameFromUser);
       return null;
     }
 
     console.log('Number of search results:', items.length);
     console.log('First search result title:', items[0].title);
+    
+    let jsonListOfQuestionsInJsonFormat= response.data
 
     // Return the entire response data for AI analysis
-    return JSON.stringify(response.data, null, 2);
+    return JSON.stringify(jsonListOfQuestionsInJsonFormat, null, 2);
   } catch (error) {
     console.error('Error fetching questions:', error.message);
     if (error.response) {
