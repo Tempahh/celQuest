@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-async function scrapeQuestions(celebrity) {
+async function scrapeQuestionsFromGoogleCustomSearchApi(celebrity) {
   const apiKey = process.env.GOOGLE_API_KEY;
   const searchEngineId = process.env.GOOGLE_SEARCH_ENGINE_ID;
   const query = `${celebrity}`;
@@ -33,4 +33,4 @@ async function scrapeQuestions(celebrity) {
   }
 }
 
-module.exports = { scrapeQuestions };
+module.exports = { scrapeQuestionsFromGoogleCustomSearchApi };
