@@ -1,5 +1,5 @@
-import { scrapeQuestions } from '../../utils/scraper';
-import { generateQuestions } from '../../utils/ai';
+import { scrapeQuestionsFromGoogleCustomSearchApi } from '../../utils/scraper';
+import { generateQuestionsAboutCelebrityFromSearchResults } from '../../utils/ai';
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
@@ -10,9 +10,9 @@ export default async function handler(req, res) {
         GOOGLE_AI_API_KEY: process.env.GOOGLE_AI_API_KEY,
       });
 
-      const { celebrity } = req.body;
-      console.log('Received celebrity:', celebrity);
-      const searchResults = await scrapeQuestions(celebrity);
+      const { InputtedCelebrityFromUser } = req.body;
+      //console.log('Received celebrity:', InputtedCelebrityFromUser);
+      const searchResults = await scrapeQuestionsFromGoogleCustomSearchApi(InputtedCelebrityFromUser);
       
       if (searchResults === null) {
         console.log('No search results found');
@@ -20,7 +20,7 @@ export default async function handler(req, res) {
       }
 
       //console.log('Search results received');
-      const generatedQuestions = await generateQuestions(celebrity, searchResults);
+      const generatedQuestions = await generateQuestionsAboutCelebrityFromSearchResults(InputtedCelebrityFromUser, searchResults);
       //console.log('Generated questions:', generatedQuestions);
       
       if (generatedQuestions.length === 0) {
