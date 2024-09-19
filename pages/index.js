@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 export default function Home() {
-  const [celebrity, setCelebrity] = useState('');
+  const [InputtedCelebrityFromUser, setInputtedCelebrityFromUser] = useState('');
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -15,7 +15,7 @@ export default function Home() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ celebrity }),
+        body: JSON.stringify({ InputtedCelebrityFromUser }),
       });
 
       if (!response.ok) {
@@ -43,8 +43,8 @@ export default function Home() {
       <h1>Celebrity Question Generator</h1>
       <input
         type="text"
-        value={celebrity}
-        onChange={(e) => setCelebrity(e.target.value)}
+        value={InputtedCelebrityFromUser}
+        onChange={(e) => setInputtedCelebrityFromUser(e.target.value)}
         placeholder="Enter celebrity name"
       />
       <button onClick={getQuestions} disabled={loading}>

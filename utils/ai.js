@@ -3,20 +3,20 @@ const { GoogleGenerativeAI } = require("@google/generative-ai");
 // Access your API key as an environment variable
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_AI_API_KEY);
 
-async function generateQuestionsAboutCelebrityFromSearchResults(InputtedCelebrityNameFromUser, searchResultsFromGoogleCustomSearchApi) {
+async function generateQuestionsAboutCelebrityFromSearchResults(InputtedCelebrityFromUser, searchResultsFromGoogleCustomSearchApi) {
   const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
   const prompt = `
-  You are an AI assistant tasked with generating interesting and insightful questions about ${InputtedCelebrityNameFromUser} based on the provided search results.
+  You are an AI assistant tasked with generating interesting and insightful questions about ${InputtedCelebrityFromUser} based on the provided search results.
 
   Here are the search results in JSON format:
   ${searchResultsFromGoogleCustomSearchApi}
 
   Please perform the following tasks:
-  1. Analyze the search results to understand key aspects of ${InputtedCelebrityNameFromUser}'s life, career, and public persona.
-  2. Generate 5 thought-provoking questions about ${InputtedCelebrityNameFromUser} that:
+  1. Analyze the search results to understand key aspects of ${InputtedCelebrityFromUser}'s life, career, and public persona.
+  2. Generate 5 thought-provoking questions about ${InputtedCelebrityFromUser} that:
      a) Are based on factual information from the search results
-     b) Cover different aspects of ${InputtedCelebrityNameFromUser}'s life or career
+     b) Cover different aspects of ${InputtedCelebrityFromUser}'s life or career
      c) Encourage deeper discussion or reflection
      d) Are not easily answerable with a simple yes or no
   3. For each question, provide a brief context or explanation of why it's interesting or relevant.
@@ -29,7 +29,7 @@ async function generateQuestionsAboutCelebrityFromSearchResults(InputtedCelebrit
   2. Question: [Next question]
   Context: [Next context]
 
-  ... and so on for 5 questions.
+  ... and so on for 10 questions.
   `;
 
   let functionToReturnTheListOfQuestionsInJsonFormat = async () => {

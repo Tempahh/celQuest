@@ -1,10 +1,10 @@
 const axios = require('axios');
 
-async function scrapeQuestionsFromGoogleCustomSearchApiUsing(InputtedCelebrityNameFromUser) {
+async function scrapeQuestionsFromGoogleCustomSearchApi(InputtedCelebrityFromUser) {
   const apiKeyToConnectWithGoogleCustomSearchApi = process.env.GOOGLE_API_KEY;
   const searchEngineIdFromGoogleCustomSearchEngine = process.env.GOOGLE_SEARCH_ENGINE_ID;
 
-  const googleApiUrlToScrapResultsFrom = `https://www.googleapis.com/customsearch/v1?key=${apiKeyToConnectWithGoogleCustomSearchApi}&cx=${searchEngineIdFromGoogleSearchEngine}&q=${encodeURIComponent(InputtedCelebrityNameFromUser)}`;
+  const googleApiUrlToScrapResultsFrom = `https://www.googleapis.com/customsearch/v1?key=${apiKeyToConnectWithGoogleCustomSearchApi}&cx=${searchEngineIdFromGoogleCustomSearchEngine}&q=${encodeURIComponent(InputtedCelebrityFromUser)}`;
 
   let functionToReturnTheListOfQuestionsInJsonFormat = async () => { // Changed to an async arrow function
     try {
@@ -15,7 +15,7 @@ async function scrapeQuestionsFromGoogleCustomSearchApiUsing(InputtedCelebrityNa
       const items = response.data.items || [];
       
       if (items.length === 0) {
-        console.log('No search results found for:', InputtedCelebrityNameFromUser);
+        console.log('No search results found for:', InputtedCelebrityFromUser);
         return null;
       }
 

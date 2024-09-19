@@ -11,7 +11,7 @@ export default async function handler(req, res) {
       });
 
       const { InputtedCelebrityFromUser } = req.body;
-      //console.log('Received celebrity:', InputtedCelebrityFromUser);
+      console.log('Received celebrity:', InputtedCelebrityFromUser);
       const searchResults = await scrapeQuestionsFromGoogleCustomSearchApi(InputtedCelebrityFromUser);
       
       if (searchResults === null) {
